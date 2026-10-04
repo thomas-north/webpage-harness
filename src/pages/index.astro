@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site.js';
+
+const hasContact = !site.contact.email.endsWith('.invalid');
+---
+
+<BaseLayout>
+  <section class:list={['hero', !site.hero.image && 'hero--plain']} id="top">
+    {site.hero.image && <img class="hero__image" src={site.hero.image.src} alt={site.hero.image.alt} fetchpriority="high" />}
+    <div class="hero__inner">
+      <p class="hero__eyebrow">{site.hero.eyebrow}</p>
+      <h1>{site.name}</h1>
+      <p class="hero__lead">{site.hero.lead}</p>
+      <p class="hero__body">{site.hero.body}</p>
+      <div class="hero__actions"><a class="button" href="#work">Explore the work</a><a class="hero__secondary" href="#contact">Get in touch</a></div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="work">
+    <div class="section__heading">
+      <p class="eyebrow">{site.offerings.eyebrow}</p>
+      <h2>{site.offerings.title}</h2>
+      <p>{site.offerings.intro}</p>
+    </div>
+    <div class="offerings">
+      {site.offerings.items.map((item, index) => (
+        <article class="offering"><span class="offering__number">{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.body}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--mint about" id="about">
+    <div><p class="eyebrow">{site.about.eyebrow}</p><h2>{site.about.title}</h2></div>
+    <div class="about__body"><p>{site.about.body}</p><a class="text-link" href="#contact">Start a conversation <span aria-hidden="true">↗</span></a></div>
+  </section>
+
+  {site.links.items.length > 0 && (
+    <section class="section section--paper" id="links">
+      <div class="section__heading"><p class="eyebrow">{site.links.eyebrow}</p><h2>{site.links.title}</h2></div>
+      <ul class="link-list">
+        {site.links.items.map((link) => <li><a href={link.url}><span>{link.label}</span><span aria-hidden="true">↗</span></a></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section class="section contact" id="contact">
+    <div><p class="eyebrow">{site.contact.eyebrow}</p><h2>{site.contact.title}</h2><p>{site.contact.body}</p></div>
+    {hasContact ? <a class="button button--light" href={`mailto:${site.contact.email}`}>Send an email</a> : <p class="contact__preview">Contact details will be added during setup.</p>}
+  </section>
+</BaseLayout>

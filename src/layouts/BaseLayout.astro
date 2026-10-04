@@ -1,0 +1,70 @@
+---
+import { site } from '../lib/site.js';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.seo.title, description = site.seo.description } = Astro.props;
+const canonical = site.siteUrl ? new URL(Astro.url.pathname, site.siteUrl).toString() : undefined;
+const socialImage = site.siteUrl && site.seo.image ? new URL(site.seo.image, site.siteUrl).toString() : undefined;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en" style={`--ink:${site.theme.ink};--paper:${site.theme.paper};--accent:${site.theme.accent};--highlight:${site.theme.highlight};`}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {(site.starterContent || !site.privacy.reviewed) && <meta name="robots" content="noindex,nofollow" />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="/" aria-label={`${site.name} home`}>
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span>{site.name}</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+        <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
+          <a href="/#work">Work</a>
+          <a href="/#about">About</a>
+          {site.links.items.length > 0 && <a href="/#links">Links</a>}
+          <a class="site-nav__contact" href="/#contact">Get in touch</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content"><slot /></main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div><a class="site-footer__brand" href="/">{site.name}</a><p>{site.descriptor}</p></div>
+        <div class="site-footer__links"><a href="/privacy">Privacy</a><a href="/#top">Back to top</a></div>
+      </div>
+      <p class="site-footer__copyright">© {year} {site.name}</p>
+    </footer>
+    <script>
+      const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.getElementById('primary-nav');
+      menu?.addEventListener('click', () => {
+        const open = menu.getAttribute('aria-expanded') !== 'true';
+        menu.setAttribute('aria-expanded', String(open));
+        nav?.classList.toggle('is-open', open);
+      });
+      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        menu?.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+      }));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "starterContent": true,
+  "siteUrl": "",
+  "name": "Northline Studio",
+  "descriptor": "Independent design studio",
+  "seo": {
+    "title": "Northline Studio | Independent design studio",
+    "description": "A fictional design studio used to preview Webpage Harness.",
+    "image": "/images/starter-studio.jpg"
+  },
+  "theme": {
+    "ink": "#17312f",
+    "paper": "#f5f7f2",
+    "accent": "#df775e",
+    "highlight": "#d8ec9b"
+  },
+  "hero": {
+    "eyebrow": "FICTIONAL STUDIO PREVIEW",
+    "lead": "Design that makes good ideas easier to share.",
+    "body": "Northline is a sample studio. This page shows the shape of a focused site before you make it your own.",
+    "image": {
+      "src": "/images/starter-studio.jpg",
+      "alt": "Hands arranging paper and colour samples in a design studio"
+    }
+  },
+  "offerings": {
+    "eyebrow": "WHAT WE DO",
+    "title": "A practical start for the work ahead.",
+    "intro": "These sample services show how a short page can help visitors understand an offer.",
+    "items": [
+      {
+        "title": "Identity",
+        "body": "A visual direction that gives an idea a clear, recognisable home."
+      },
+      {
+        "title": "Digital",
+        "body": "Simple pages that explain the essentials and make the next step easy."
+      },
+      {
+        "title": "Print",
+        "body": "Thoughtful details for the moments when a project becomes something tangible."
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "ABOUT",
+    "title": "Small by choice. Clear by design.",
+    "body": "Northline Studio is a fictional example. Replace this with your own story, approach, or the detail that helps people decide whether to work with you."
+  },
+  "links": {
+    "eyebrow": "FIND MORE",
+    "title": "Elsewhere on the web",
+    "items": []
+  },
+  "contact": {
+    "eyebrow": "GET IN TOUCH",
+    "title": "Let's talk about your project.",
+    "body": "Share a little about what you are making and what you need next.",
+    "email": "hello@northline.example.invalid"
+  },
+  "privacy": {
+    "reviewed": false,
+    "controller": "Northline Studio",
+    "contactEmail": "hello@northline.example.invalid",
+    "paragraphs": [
+      "This is draft privacy copy for the fictional starter site. Replace it with an accurate explanation of how you handle messages, hosting data, and any other personal information before publishing."
+    ]
+  }
+}
